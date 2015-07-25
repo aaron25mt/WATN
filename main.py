@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from requests import get
+from json import dumps #only for prettiness
 
 def grab_url(query):
 	show = "%20".join(query.lower().split(" "))
@@ -38,4 +39,5 @@ if __name__ == "__main__":
 		soup = BeautifulSoup(get(grab_url(actor)).text, 'html.parser')
 		recents = grab_recent_shows(soup, actor, showLimit)
 		output[actor] = recents
-	print("\n{}".format(output))
+	print(dumps(output, indent=4))
+	#print("\n{}".format(output))
